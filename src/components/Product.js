@@ -2,11 +2,31 @@ import React, { useState ,useEffect} from 'react'
 import Image from 'next/image';
 import { StarIcon } from '@heroicons/react/solid';
 import CurrencyFormat from '../helpers/CurrencyFormat';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../slices/cartSlice';
 const MAX_RATING =5;
 const MIN_RATING=1;
 
 
 function Product({id,title,price,description,category,image}) {
+    const dispatch = useDispatch();
+    const addItemstoCart= ()=>{
+      const product = {
+        id,
+        title,
+        price,
+        description,
+        category,
+        image,
+        rating,
+        hasPrime,
+        
+      };
+      
+      // Sending the product as an action REDUX store... the cart Slice
+      dispatch(addToCart(product));
+
+    };
   
     const [rating, setRating] = useState(0);
     const [hasPrime,setPrime] = useState(0);
@@ -59,7 +79,7 @@ function Product({id,title,price,description,category,image}) {
           </div>
           )}  
 
-          <button className="mt-auto button">Add to Cart</button>      
+          <button onClick={addItemstoCart} className="mt-auto button">Add to Cart</button>      
     </div>
   );
 }

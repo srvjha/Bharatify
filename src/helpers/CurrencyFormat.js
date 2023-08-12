@@ -6,4 +6,5 @@ const CurrencyFormat = ({price})=>{
     }).format(price*10);
 };
 
+
 export default CurrencyFormat
