@@ -72,7 +72,7 @@ const orders = await Promise.all(
         timestamp:moment(order.data().timestamp.toDate()).unix(),
         items:(
             await stripe.checkout.sessions.listLineItems(order.id,{
-                limit:100
+                limit:200
             })
         ).data,
     }))
